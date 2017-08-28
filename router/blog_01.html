@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>对路由的实现</title>
+</head>
+<body>
+<a href="#/home">HOME</a>
+<a href="#/cart">CART</a>
+<h1>    利用锚点和hash来实现基本的框架路由功能    </h1>
+<router-view></router-view>
+<div>
+
+
+    <<<<<<<<<<<<<<<<<<<<<<<<<<<br>
+    <<<<<<<<<<<<<<<<<<<<<<<<<<<<br>
+    <br>
+    <br>
+    路由下面的内容
+    <br>
+    <br>
+    >>>>>>>>>>>>>>>>>>>>>>>>>>>><br>
+    >>>>>>>>>>>>>>>>>>>>>>>>>>>><br>
+
+
+
+</div>
+</body>
+</html>
+<script>
+    // 根据地址栏锚值的没同在router-view位置显示不同的内容
+    var Home = {template: '<div><h3>我是Home!!!!!!!!!!!!!!!!!!!</h3></div>'}
+    var Cart = {template: '<div><h3>我是Cart..................</h3></div>'}
+
+    var routes = [
+        {name:'home',path:'/home',component:Home},
+        {name:'cart',path:'/cart',component:Cart}
+    ]
+
+    // 1.监听地址栏锚点改变的事件hashchange
+    window.onhashchange = function () {
+        console.log('当锚发生变化的时候， 执行下面的方法')
+        // 2.要判断当前地址栏中锚点值是什么
+        // 如果当前的锚点值与我们写的规则中的routes对应，就显示相应的component
+        var hash = location.hash; // #/xxx
+        // splice
+        hash = hash.slice(1, hash.length) ;
+
+        // 3.遍历routes，去判断每个元素的path 是否与hash相等
+        for (var i = 0; i < routes.length; i++) {
+            var item = routes[i]
+
+            if(item.path === hash){
+                // 当相等时，就把当前元素的component属性的对应的内容插入到页面
+                // router-view
+                var oView = document.querySelector('router-view')
+                oView.innerHTML = item.component.template
+            }
+        }
+
+    }
+</script>
