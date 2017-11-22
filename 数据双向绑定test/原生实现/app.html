@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MVVM</title>
+</head>
+<body>
+
+<div id="app">
+    <input type="text" v-model="someStr">
+    <input type="text" v-model="child.someStr">
+
+    <p>{{someStr}}</p>
+    <br>
+    <br>
+    <p>{{child.someStr}}</p>
+    <br>
+    <br>
+    <p>{{someStr}}</p>
+
+</div>
+
+<!--<script src="http://cdn.bootcss.com/vue/1.0.25/vue.js"></script>-->
+<script src="./observer.js"></script>
+<script src="./watcher.js"></script>
+<script src="./compiler.js"></script>
+<script src="./mvvm.js"></script>
+<script>
+
+
+    var vm = new MVVM({
+        el: '#app',
+        data: {
+            someStr: 'hello ',
+            child: {
+                someStr: 'World !'
+            }
+        },
+
+    });
+
+
+
+
+</script>
+
+</body>
+</html>
