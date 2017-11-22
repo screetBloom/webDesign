@@ -83,4 +83,6 @@ function DataBinder(object_id) {
     return pubSub;
 }
 
-var $data = new User('model');
+
+
+
