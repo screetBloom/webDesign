@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>对路由的实现</title>
+</head>
+
+<style>
+
+    * {
+        padding: 0;
+    }
+
+    html,
+    body {
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        margin: 0;
+    }
+
+    .header {
+        height: 160px;
+        width: 100%;
+        background-color: #20A0FF;
+        text-align: center;
+        font-size: 30px;
+        color: white;
+    }
+
+    .head_icon {
+        margin-left: 80px;
+        height: 100px;
+        width: 100px;
+        float: left;
+        margin-top: 20px;
+    }
+
+    .head_title {
+        float: left;
+        line-height: 160px;
+        font-size: 52px;
+        margin-left: 48px;
+        letter-spacing: 30px;
+    }
+
+    .head_login {
+        float: right;
+        line-height: 160px;
+        margin-right: 140px;
+    }
+
+    .head_logoff {
+        float: right;
+        line-height: 160px;
+        margin-right: 100px;
+        cursor: pointer;
+    }
+
+    .left {
+        width: 10%;
+        min-height: 100%;
+        background-color: #EFF2F7;
+        line-height: 100px;
+        float: left;
+    }
+
+    .left a {
+        margin-left: 40px;
+    }
+
+    .left a:first-child {
+        display: inline-block;
+        margin-top: 40px;
+    }
+
+    router-view {
+        font-size: 100px;
+        width: 90%;
+        height: 100%;
+        float: left;
+    }
+
+
+</style>
+
+<body id="app">
+
+
+<header-Component></header-Component>
+
+<left-Component></left-Component>
+
+
+
+<router-view></router-view>
+
+
+</body>
+</html>
+
+<!--需要导入的模板-->
+<script src="./template/header.js"></script>
+<script src="./template/left.js"></script>
+<script src="./component/home.js"></script>
+<script src="./component/cat.js"></script>
+
+<script>
+
+
+    var data = {
+        value: 'hello!',
+        name:'模板引擎0.1',
+        edition: '继续测试'
+    };
+
+
+
+    var component = {
+        headerComponent: {template: headerStr},
+        leftComponent: {template: leftStr},
+        home: {template: homeStr},
+        cat: {template: catStr}
+    }
+
+
+    var routes = [
+        {name: 'home', path: '/home', component: component.home},
+        {name: 'cat', path: '/cat', component: component.cat}
+    ]
+
+
+
+    document.querySelector('header-Component').innerHTML = component.headerComponent.template
+    document.querySelector('left-Component').innerHTML = component.leftComponent.template
+
+
+    window.onhashchange = function () {
+        var hash = location.hash;
+        hash = hash.slice(1, hash.length);
+        for (var i = 0; i < routes.length; i++) {
+            var item = routes[i]
+            if (item.path === hash) {
+                var oView = document.querySelector('router-view')
+                oView.innerHTML = _fn(item.component.template, data)
+                _mvvmFn()
+            }
+        }
+    }
+</script>
+
+<!--框架函数-->
+<script src="WeCat/WeCat.js"></script>
