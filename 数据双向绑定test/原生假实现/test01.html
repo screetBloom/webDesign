@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="mvvm.js"></script>
+
+</head>
+<body>
+
+
+
+<input  v-model="data" oninput="test(this)"/>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<br>
+<div  v-model="data" ></div>
+
+</body>
+</html>
+
+
+<script>
+
+
+
+//    $data.set( "data", "订阅者发布者" );
+    $data.set( "data", 'ddd');
+
+
+    function test(obj){
+
+        $data.set( "data", obj.value );
+
+    }
+
+
+
+
+</script>
