@@ -12,3 +12,5 @@ var homeStr = "<div>" +
     "<div v-model='value'></div>"
 
 
+
+
